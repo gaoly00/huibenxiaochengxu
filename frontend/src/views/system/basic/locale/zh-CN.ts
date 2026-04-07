@@ -1,0 +1,15 @@
+export default {
+  'menu.system': '系统管理',
+  'menu.system.basic': '基础设置',
+  'basicSettings.title': '基础设置',
+  'basicSettings.form.appName': '应用名称',
+  'basicSettings.form.appName.placeholder': '请输入应用名称',
+  'basicSettings.form.appDescription': '应用描述',
+  'basicSettings.form.appDescription.placeholder': '请输入应用描述',
+  'basicSettings.form.contactInfo': '联系方式',
+  'basicSettings.form.contactInfo.placeholder': '请输入联系方式',
+  'basicSettings.form.pointsDeductionNote': '积分抵扣说明',
+  'basicSettings.form.pointsDeductionNote.placeholder': '请输入积分抵扣说明',
+  'basicSettings.operation.save': '保存',
+  'basicSettings.save.success': '保存成功',
+};

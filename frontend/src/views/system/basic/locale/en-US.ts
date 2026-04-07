@@ -1,0 +1,15 @@
+export default {
+  'menu.system': 'System',
+  'menu.system.basic': 'Basic Settings',
+  'basicSettings.title': 'Basic Settings',
+  'basicSettings.form.appName': 'App Name',
+  'basicSettings.form.appName.placeholder': 'Please enter app name',
+  'basicSettings.form.appDescription': 'App Description',
+  'basicSettings.form.appDescription.placeholder': 'Please enter app description',
+  'basicSettings.form.contactInfo': 'Contact Info',
+  'basicSettings.form.contactInfo.placeholder': 'Please enter contact info',
+  'basicSettings.form.pointsDeductionNote': 'Points Deduction Note',
+  'basicSettings.form.pointsDeductionNote.placeholder': 'Please enter points deduction note',
+  'basicSettings.operation.save': 'Save',
+  'basicSettings.save.success': 'Saved successfully',
+};
