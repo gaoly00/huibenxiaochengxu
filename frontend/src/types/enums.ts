@@ -26,17 +26,6 @@ export enum ReadingClarity {
 }
 
 // ========== 商品相关 ==========
-export enum ProductType {
-  PHYSICAL = 'physical',
-  DIGITAL = 'digital',
-}
-
-export enum ProductStatus {
-  DRAFT = 'draft',
-  ON_SALE = 'on_sale',
-  OFF_SALE = 'off_sale',
-}
-
 export enum ProductSpec {
   A4 = 'A4',
   A5 = 'A5',

@@ -64,6 +64,16 @@ const PICTURE_BOOK: AppRouteRecordRaw = {
         roles: ['*'],
       },
     },
+    {
+      path: 'shipping-templates',
+      name: 'ShippingTemplates',
+      component: () => import('@/views/picture-book/shipping/index.vue'),
+      meta: {
+        locale: 'menu.pictureBook.shippingTemplates',
+        requiresAuth: true,
+        roles: ['*'],
+      },
+    },
   ],
 };
 

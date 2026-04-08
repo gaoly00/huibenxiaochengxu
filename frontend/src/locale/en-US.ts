@@ -7,10 +7,7 @@ import localePBList from '@/views/picture-book/list/locale/en-US';
 import localePBForm from '@/views/picture-book/form/locale/en-US';
 import localePBCategory from '@/views/picture-book/category/locale/en-US';
 import localePBTag from '@/views/picture-book/tag/locale/en-US';
-// Product
-import localeProdList from '@/views/product/list/locale/en-US';
-import localeProdForm from '@/views/product/form/locale/en-US';
-import localeProdShipping from '@/views/product/shipping/locale/en-US';
+import localePBShipping from '@/views/picture-book/shipping/locale/en-US';
 // Order
 import localeOrderList from '@/views/order/list/locale/en-US';
 import localeOrderDetail from '@/views/order/detail/locale/en-US';
@@ -44,11 +41,7 @@ export default {
   'menu.pictureBook.edit': 'Edit Book',
   'menu.pictureBook.categories': 'Categories',
   'menu.pictureBook.tags': 'Tags',
-  'menu.product': 'Products',
-  'menu.product.list': 'Product List',
-  'menu.product.create': 'Create Product',
-  'menu.product.edit': 'Edit Product',
-  'menu.product.shippingTemplates': 'Shipping Templates',
+  'menu.pictureBook.shippingTemplates': 'Shipping Templates',
   'menu.order': 'Orders',
   'menu.order.list': 'All Orders',
   'menu.order.physicalDetail': 'Physical Order Detail',
@@ -82,9 +75,7 @@ export default {
   ...localePBForm,
   ...localePBCategory,
   ...localePBTag,
-  ...localeProdList,
-  ...localeProdForm,
-  ...localeProdShipping,
+  ...localePBShipping,
   ...localeOrderList,
   ...localeOrderDetail,
   ...localeUserList,

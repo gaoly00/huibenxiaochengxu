@@ -7,10 +7,7 @@ import localePBList from '@/views/picture-book/list/locale/zh-CN';
 import localePBForm from '@/views/picture-book/form/locale/zh-CN';
 import localePBCategory from '@/views/picture-book/category/locale/zh-CN';
 import localePBTag from '@/views/picture-book/tag/locale/zh-CN';
-// 商品
-import localeProdList from '@/views/product/list/locale/zh-CN';
-import localeProdForm from '@/views/product/form/locale/zh-CN';
-import localeProdShipping from '@/views/product/shipping/locale/zh-CN';
+import localePBShipping from '@/views/picture-book/shipping/locale/zh-CN';
 // 订单
 import localeOrderList from '@/views/order/list/locale/zh-CN';
 import localeOrderDetail from '@/views/order/detail/locale/zh-CN';
@@ -44,11 +41,7 @@ export default {
   'menu.pictureBook.edit': '编辑绘本',
   'menu.pictureBook.categories': '分类管理',
   'menu.pictureBook.tags': '标签管理',
-  'menu.product': '商品管理',
-  'menu.product.list': '商品列表',
-  'menu.product.create': '新增商品',
-  'menu.product.edit': '编辑商品',
-  'menu.product.shippingTemplates': '运费模板',
+  'menu.pictureBook.shippingTemplates': '运费模板',
   'menu.order': '订单管理',
   'menu.order.list': '全部订单',
   'menu.order.physicalDetail': '纸质版订单详情',
@@ -82,9 +75,7 @@ export default {
   ...localePBForm,
   ...localePBCategory,
   ...localePBTag,
-  ...localeProdList,
-  ...localeProdForm,
-  ...localeProdShipping,
+  ...localePBShipping,
   ...localeOrderList,
   ...localeOrderDetail,
   ...localeUserList,

@@ -26,7 +26,7 @@ for (let i = 0; i < 5; i += 1) {
 setupMock({
   setup() {
     // List
-    Mock.mock(new RegExp('/api/product/shipping-template/list'), (params: { url: string }) => {
+    Mock.mock(new RegExp('/api/picture-book/shipping-template/list'), (params: { url: string }) => {
       const queryParams = qs.parseUrl(params.url).query as any;
       const current = parseInt(queryParams.current, 10) || 1;
       const pageSize = parseInt(queryParams.pageSize, 10) || 10;
@@ -40,17 +40,17 @@ setupMock({
     });
 
     // Create
-    Mock.mock(new RegExp('/api/product/shipping-template/create'), 'post', () => {
+    Mock.mock(new RegExp('/api/picture-book/shipping-template/create'), 'post', () => {
       return successResponseWrap({ id: Mock.mock('@guid') });
     });
 
     // Update
-    Mock.mock(new RegExp('/api/product/shipping-template/[a-zA-Z0-9-]+$'), 'put', () => {
+    Mock.mock(new RegExp('/api/picture-book/shipping-template/[a-zA-Z0-9-]+$'), 'put', () => {
       return successResponseWrap(true);
     });
 
     // Delete
-    Mock.mock(new RegExp('/api/product/shipping-template/[a-zA-Z0-9-]+$'), 'delete', () => {
+    Mock.mock(new RegExp('/api/picture-book/shipping-template/[a-zA-Z0-9-]+$'), 'delete', () => {
       return successResponseWrap(true);
     });
   },

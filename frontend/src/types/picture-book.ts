@@ -3,6 +3,7 @@ import {
   PdfConvertStatus,
   AgeGroup,
   ReadingClarity,
+  ProductSpec,
   EnableStatus,
 } from './enums';
 
@@ -30,11 +31,21 @@ export interface PictureBookRecord {
   allowOnlineReading: boolean;
   readingClarity: ReadingClarity;
   readingEndGuideText: string;
-  // 商品关联
-  physicalProductId: string;
-  physicalProductName: string;
-  digitalProductId: string;
-  digitalProductName: string;
+  // 纸质版商品
+  physicalEnabled: boolean;
+  physicalPrice: number;
+  physicalOriginalPrice: number;
+  physicalSpec: ProductSpec;
+  physicalShippingTemplateId: string;
+  physicalStockEnabled: boolean;
+  physicalStock: number;
+  // 电子版商品
+  digitalEnabled: boolean;
+  digitalPrice: number;
+  digitalOriginalPrice: number;
+  digitalBaiduPanUrl: string;
+  digitalBaiduPanCode: string;
+  digitalDeliveryNote: string;
   createdTime: string;
   updatedTime: string;
 }
@@ -91,5 +102,28 @@ export interface TagParams {
 
 export interface TagListRes {
   list: TagRecord[];
+  total: number;
+}
+
+// 运费模板
+export interface ShippingTemplateRecord {
+  id: string;
+  name: string;
+  chargeDescription: string;
+  freeShippingRule: string;
+  status: EnableStatus;
+  createdTime: string;
+  updatedTime: string;
+}
+
+export interface ShippingTemplateParams {
+  name?: string;
+  status?: EnableStatus;
+  current: number;
+  pageSize: number;
+}
+
+export interface ShippingTemplateListRes {
+  list: ShippingTemplateRecord[];
   total: number;
 }

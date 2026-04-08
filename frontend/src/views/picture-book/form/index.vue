@@ -142,24 +142,72 @@
           </a-form-item>
         </a-form>
       </a-card>
-      <!-- Section 4: 商品关联 -->
-      <a-card class="general-card" :title="$t('pictureBookForm.section.product')">
+      <!-- Section 4: 纸质版商品 -->
+      <a-card class="general-card" :title="$t('pictureBookForm.section.physical')">
         <a-form
           :model="formData"
           :label-col-props="{ span: 4 }"
           :wrapper-col-props="{ span: 18 }"
           label-align="left"
         >
-          <a-form-item field="physicalProductId" :label="$t('pictureBookForm.label.physicalProductId')">
-            <a-select v-model="formData.physicalProductId" :placeholder="$t('pictureBookForm.placeholder.physicalProductId')" allow-clear>
-              <a-option v-for="p in physicalProducts" :key="p.id" :value="p.id">{{ p.name }}</a-option>
-            </a-select>
+          <a-form-item field="physicalEnabled" :label="$t('pictureBookForm.label.physicalEnabled')">
+            <a-switch v-model="formData.physicalEnabled" />
           </a-form-item>
-          <a-form-item field="digitalProductId" :label="$t('pictureBookForm.label.digitalProductId')">
-            <a-select v-model="formData.digitalProductId" :placeholder="$t('pictureBookForm.placeholder.digitalProductId')" allow-clear>
-              <a-option v-for="p in digitalProducts" :key="p.id" :value="p.id">{{ p.name }}</a-option>
-            </a-select>
+          <template v-if="formData.physicalEnabled">
+            <a-form-item field="physicalPrice" :label="$t('pictureBookForm.label.physicalPrice')" :rules="[{ required: true, message: $t('pictureBookForm.rules.physicalPrice') }]">
+              <a-input-number v-model="formData.physicalPrice" :min="0" :precision="2" :placeholder="$t('pictureBookForm.placeholder.physicalPrice')" />
+            </a-form-item>
+            <a-form-item field="physicalOriginalPrice" :label="$t('pictureBookForm.label.physicalOriginalPrice')">
+              <a-input-number v-model="formData.physicalOriginalPrice" :min="0" :precision="2" :placeholder="$t('pictureBookForm.placeholder.physicalOriginalPrice')" />
+            </a-form-item>
+            <a-form-item field="physicalSpec" :label="$t('pictureBookForm.label.physicalSpec')">
+              <a-select v-model="formData.physicalSpec" :placeholder="$t('pictureBookForm.placeholder.physicalSpec')">
+                <a-option value="A4">A4</a-option>
+                <a-option value="A5">A5</a-option>
+              </a-select>
+            </a-form-item>
+            <a-form-item field="physicalShippingTemplateId" :label="$t('pictureBookForm.label.physicalShippingTemplateId')">
+              <a-select v-model="formData.physicalShippingTemplateId" :placeholder="$t('pictureBookForm.placeholder.physicalShippingTemplateId')" allow-clear>
+                <a-option v-for="tpl in shippingTemplates" :key="tpl.id" :value="tpl.id">{{ tpl.name }}</a-option>
+              </a-select>
+            </a-form-item>
+            <a-form-item field="physicalStockEnabled" :label="$t('pictureBookForm.label.physicalStockEnabled')">
+              <a-switch v-model="formData.physicalStockEnabled" />
+            </a-form-item>
+            <a-form-item v-if="formData.physicalStockEnabled" field="physicalStock" :label="$t('pictureBookForm.label.physicalStock')">
+              <a-input-number v-model="formData.physicalStock" :min="0" />
+            </a-form-item>
+          </template>
+        </a-form>
+      </a-card>
+      <!-- Section 5: 电子版商品 -->
+      <a-card class="general-card" :title="$t('pictureBookForm.section.digital')">
+        <a-form
+          :model="formData"
+          :label-col-props="{ span: 4 }"
+          :wrapper-col-props="{ span: 18 }"
+          label-align="left"
+        >
+          <a-form-item field="digitalEnabled" :label="$t('pictureBookForm.label.digitalEnabled')">
+            <a-switch v-model="formData.digitalEnabled" />
           </a-form-item>
+          <template v-if="formData.digitalEnabled">
+            <a-form-item field="digitalPrice" :label="$t('pictureBookForm.label.digitalPrice')" :rules="[{ required: true, message: $t('pictureBookForm.rules.digitalPrice') }]">
+              <a-input-number v-model="formData.digitalPrice" :min="0" :precision="2" :placeholder="$t('pictureBookForm.placeholder.digitalPrice')" />
+            </a-form-item>
+            <a-form-item field="digitalOriginalPrice" :label="$t('pictureBookForm.label.digitalOriginalPrice')">
+              <a-input-number v-model="formData.digitalOriginalPrice" :min="0" :precision="2" :placeholder="$t('pictureBookForm.placeholder.digitalOriginalPrice')" />
+            </a-form-item>
+            <a-form-item field="digitalBaiduPanUrl" :label="$t('pictureBookForm.label.digitalBaiduPanUrl')" :rules="[{ required: true, message: $t('pictureBookForm.rules.digitalBaiduPanUrl') }]">
+              <a-input v-model="formData.digitalBaiduPanUrl" :placeholder="$t('pictureBookForm.placeholder.digitalBaiduPanUrl')" />
+            </a-form-item>
+            <a-form-item field="digitalBaiduPanCode" :label="$t('pictureBookForm.label.digitalBaiduPanCode')">
+              <a-input v-model="formData.digitalBaiduPanCode" :placeholder="$t('pictureBookForm.placeholder.digitalBaiduPanCode')" />
+            </a-form-item>
+            <a-form-item field="digitalDeliveryNote" :label="$t('pictureBookForm.label.digitalDeliveryNote')">
+              <a-textarea v-model="formData.digitalDeliveryNote" :placeholder="$t('pictureBookForm.placeholder.digitalDeliveryNote')" :auto-size="{ minRows: 2 }" />
+            </a-form-item>
+          </template>
         </a-form>
       </a-card>
 
@@ -193,7 +241,7 @@
     createPictureBook,
     updatePictureBook,
   } from '@/api/picture-book';
-  import { queryCategoryList, queryTagList } from '@/api/picture-book';
+  import { queryCategoryList, queryTagList, queryShippingTemplateList } from '@/api/picture-book';
 
   const { t } = useI18n();
   const route = useRoute();
@@ -208,8 +256,7 @@
   const pdfFileList = ref<any[]>([]);
   const categoryOptions = ref<{ id: string; name: string }[]>([]);
   const tagOptions = ref<{ id: string; name: string }[]>([]);
-  const physicalProducts = ref<{ id: string; name: string }[]>([]);
-  const digitalProducts = ref<{ id: string; name: string }[]>([]);
+  const shippingTemplates = ref<{ id: string; name: string }[]>([]);
 
   // wangeditor
   const editorRef = shallowRef<IDomEditor>();
@@ -244,8 +291,19 @@
     allowOnlineReading: false,
     readingClarity: 'medium' as any,
     readingEndGuideText: '',
-    physicalProductId: '',
-    digitalProductId: '',
+    physicalEnabled: false,
+    physicalPrice: undefined,
+    physicalOriginalPrice: undefined,
+    physicalSpec: 'A4' as any,
+    physicalShippingTemplateId: '',
+    physicalStockEnabled: false,
+    physicalStock: 0,
+    digitalEnabled: false,
+    digitalPrice: undefined,
+    digitalOriginalPrice: undefined,
+    digitalBaiduPanUrl: '',
+    digitalBaiduPanCode: '',
+    digitalDeliveryNote: '',
   });
 
   const formData = ref(generateFormData());
@@ -299,12 +357,14 @@
 
   const fetchOptions = async () => {
     try {
-      const [catRes, tagRes] = await Promise.all([
+      const [catRes, tagRes, shippingRes] = await Promise.all([
         queryCategoryList({ current: 1, pageSize: 100 }),
         queryTagList({ current: 1, pageSize: 100 }),
+        queryShippingTemplateList({ current: 1, pageSize: 100 }),
       ]);
       categoryOptions.value = catRes.data.list.map((c) => ({ id: c.id, name: c.name }));
       tagOptions.value = tagRes.data.list.map((t2) => ({ id: t2.id, name: t2.name }));
+      shippingTemplates.value = shippingRes.data.list.map((s) => ({ id: s.id, name: s.name }));
     } catch (e) {
       // ignore
     }

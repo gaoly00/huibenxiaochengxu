@@ -10,6 +10,9 @@ import {
   TagRecord,
   TagParams,
   TagListRes,
+  ShippingTemplateRecord,
+  ShippingTemplateParams,
+  ShippingTemplateListRes,
 } from '@/types/picture-book';
 
 export function queryPictureBookList(params: PictureBookParams) {
@@ -81,4 +84,24 @@ export function updateTag(id: string, data: Partial<TagRecord>) {
 
 export function deleteTag(id: string) {
   return axios.delete(`/api/picture-book/tag/${id}`);
+}
+
+// 运费模板
+export function queryShippingTemplateList(params: ShippingTemplateParams) {
+  return axios.get<ShippingTemplateListRes>('/api/picture-book/shipping-template/list', {
+    params,
+    paramsSerializer: (obj) => qs.stringify(obj),
+  });
+}
+
+export function createShippingTemplate(data: Partial<ShippingTemplateRecord>) {
+  return axios.post('/api/picture-book/shipping-template/create', data);
+}
+
+export function updateShippingTemplate(id: string, data: Partial<ShippingTemplateRecord>) {
+  return axios.put(`/api/picture-book/shipping-template/${id}`, data);
+}
+
+export function deleteShippingTemplate(id: string) {
+  return axios.delete(`/api/picture-book/shipping-template/${id}`);
 }

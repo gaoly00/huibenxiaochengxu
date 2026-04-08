@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "additionalDirectories": [
+      "c:\\Users\\dell\\.claude\\plans"
+    ],
+    "allow": [
+      "Bash(rm -rf views/product)",
+      "Bash(rm -f router/routes/modules/product.ts)",
+      "Bash(rm -f api/product.ts)",
+      "Bash(rm -f types/product.ts)"
+    ]
+  }
+}

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Breadcrumb :items="['menu.product', 'menu.product.shippingTemplates']" />
+    <Breadcrumb :items="['menu.pictureBook', 'menu.pictureBook.shippingTemplates']" />
     <a-card class="general-card" :title="$t('shippingTemplate.title')">
       <!-- Toolbar -->
       <a-row style="margin-bottom: 16px">
@@ -144,13 +144,13 @@
   import { Message } from '@arco-design/web-vue';
   import useLoading from '@/hooks/loading';
   import { Pagination } from '@/types/global';
-  import { ShippingTemplateRecord } from '@/types/product';
+  import { ShippingTemplateRecord } from '@/types/picture-book';
   import {
     queryShippingTemplateList,
     createShippingTemplate,
     updateShippingTemplate,
     deleteShippingTemplate,
-  } from '@/api/product';
+  } from '@/api/picture-book';
   import Breadcrumb from '@/components/breadcrumb/index.vue';
 
   const { t } = useI18n();
