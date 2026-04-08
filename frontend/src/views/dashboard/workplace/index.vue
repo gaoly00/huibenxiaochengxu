@@ -28,27 +28,6 @@
         </a-col>
       </a-row>
 
-      <!-- Quick Entry -->
-      <a-card class="general-card" :bordered="false" :title="$t('workplace.quickEntry')" style="margin-top: 16px">
-        <a-space :size="16">
-          <a-button type="primary" @click="$router.push({ name: 'PictureBookCreate' })">
-            <template #icon><icon-plus /></template>
-            {{ $t('workplace.addPictureBook') }}
-          </a-button>
-          <a-button type="primary" status="success" @click="$router.push({ name: 'ProductCreate' })">
-            <template #icon><icon-plus /></template>
-            {{ $t('workplace.addProduct') }}
-          </a-button>
-          <a-button @click="$router.push({ name: 'OrderList' })">
-            <template #icon><icon-file /></template>
-            {{ $t('workplace.viewOrders') }}
-          </a-button>
-          <a-button @click="$router.push({ name: 'ReviewComments' })">
-            <template #icon><icon-message /></template>
-            {{ $t('workplace.reviewAudit') }}
-          </a-button>
-        </a-space>
-      </a-card>
       <!-- Rankings -->
       <a-row :gutter="16" style="margin-top: 16px">
         <a-col :span="12">

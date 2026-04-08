@@ -3,7 +3,6 @@ import {
   PdfConvertStatus,
   AgeGroup,
   ReadingClarity,
-  ProductSpec,
   EnableStatus,
 } from './enums';
 
@@ -33,16 +32,15 @@ export interface PictureBookRecord {
   readingEndGuideText: string;
   // 纸质版商品
   physicalEnabled: boolean;
-  physicalPrice: number;
-  physicalOriginalPrice: number;
-  physicalSpec: ProductSpec;
+  physicalSpecs: string[];
+  physicalPriceA4: number;
+  physicalPriceA5: number;
   physicalShippingTemplateId: string;
   physicalStockEnabled: boolean;
   physicalStock: number;
   // 电子版商品
   digitalEnabled: boolean;
   digitalPrice: number;
-  digitalOriginalPrice: number;
   digitalBaiduPanUrl: string;
   digitalBaiduPanCode: string;
   digitalDeliveryNote: string;

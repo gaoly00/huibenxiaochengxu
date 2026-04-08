@@ -154,17 +154,17 @@
             <a-switch v-model="formData.physicalEnabled" />
           </a-form-item>
           <template v-if="formData.physicalEnabled">
-            <a-form-item field="physicalPrice" :label="$t('pictureBookForm.label.physicalPrice')" :rules="[{ required: true, message: $t('pictureBookForm.rules.physicalPrice') }]">
-              <a-input-number v-model="formData.physicalPrice" :min="0" :precision="2" :placeholder="$t('pictureBookForm.placeholder.physicalPrice')" />
+            <a-form-item field="physicalSpecs" :label="$t('pictureBookForm.label.physicalSpec')" :rules="[{ required: true, message: $t('pictureBookForm.rules.physicalSpec') }]">
+              <a-checkbox-group v-model="formData.physicalSpecs">
+                <a-checkbox value="A4">A4</a-checkbox>
+                <a-checkbox value="A5">A5</a-checkbox>
+              </a-checkbox-group>
             </a-form-item>
-            <a-form-item field="physicalOriginalPrice" :label="$t('pictureBookForm.label.physicalOriginalPrice')">
-              <a-input-number v-model="formData.physicalOriginalPrice" :min="0" :precision="2" :placeholder="$t('pictureBookForm.placeholder.physicalOriginalPrice')" />
+            <a-form-item v-if="formData.physicalSpecs?.includes('A4')" field="physicalPriceA4" :label="$t('pictureBookForm.label.physicalPriceA4')" :rules="[{ required: true, message: $t('pictureBookForm.rules.physicalPriceA4') }]">
+              <a-input-number v-model="formData.physicalPriceA4" :min="0" :precision="2" :placeholder="$t('pictureBookForm.placeholder.physicalPriceA4')" />
             </a-form-item>
-            <a-form-item field="physicalSpec" :label="$t('pictureBookForm.label.physicalSpec')">
-              <a-select v-model="formData.physicalSpec" :placeholder="$t('pictureBookForm.placeholder.physicalSpec')">
-                <a-option value="A4">A4</a-option>
-                <a-option value="A5">A5</a-option>
-              </a-select>
+            <a-form-item v-if="formData.physicalSpecs?.includes('A5')" field="physicalPriceA5" :label="$t('pictureBookForm.label.physicalPriceA5')" :rules="[{ required: true, message: $t('pictureBookForm.rules.physicalPriceA5') }]">
+              <a-input-number v-model="formData.physicalPriceA5" :min="0" :precision="2" :placeholder="$t('pictureBookForm.placeholder.physicalPriceA5')" />
             </a-form-item>
             <a-form-item field="physicalShippingTemplateId" :label="$t('pictureBookForm.label.physicalShippingTemplateId')">
               <a-select v-model="formData.physicalShippingTemplateId" :placeholder="$t('pictureBookForm.placeholder.physicalShippingTemplateId')" allow-clear>
@@ -194,9 +194,6 @@
           <template v-if="formData.digitalEnabled">
             <a-form-item field="digitalPrice" :label="$t('pictureBookForm.label.digitalPrice')" :rules="[{ required: true, message: $t('pictureBookForm.rules.digitalPrice') }]">
               <a-input-number v-model="formData.digitalPrice" :min="0" :precision="2" :placeholder="$t('pictureBookForm.placeholder.digitalPrice')" />
-            </a-form-item>
-            <a-form-item field="digitalOriginalPrice" :label="$t('pictureBookForm.label.digitalOriginalPrice')">
-              <a-input-number v-model="formData.digitalOriginalPrice" :min="0" :precision="2" :placeholder="$t('pictureBookForm.placeholder.digitalOriginalPrice')" />
             </a-form-item>
             <a-form-item field="digitalBaiduPanUrl" :label="$t('pictureBookForm.label.digitalBaiduPanUrl')" :rules="[{ required: true, message: $t('pictureBookForm.rules.digitalBaiduPanUrl') }]">
               <a-input v-model="formData.digitalBaiduPanUrl" :placeholder="$t('pictureBookForm.placeholder.digitalBaiduPanUrl')" />
@@ -292,15 +289,14 @@
     readingClarity: 'medium' as any,
     readingEndGuideText: '',
     physicalEnabled: false,
-    physicalPrice: undefined,
-    physicalOriginalPrice: undefined,
-    physicalSpec: 'A4' as any,
+    physicalSpecs: [],
+    physicalPriceA4: undefined,
+    physicalPriceA5: undefined,
     physicalShippingTemplateId: '',
     physicalStockEnabled: false,
     physicalStock: 0,
     digitalEnabled: false,
     digitalPrice: undefined,
-    digitalOriginalPrice: undefined,
     digitalBaiduPanUrl: '',
     digitalBaiduPanCode: '',
     digitalDeliveryNote: '',

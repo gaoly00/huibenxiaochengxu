@@ -25,12 +25,6 @@ export enum ReadingClarity {
   MEDIUM = 'medium',
 }
 
-// ========== 商品相关 ==========
-export enum ProductSpec {
-  A4 = 'A4',
-  A5 = 'A5',
-}
-
 // ========== 订单相关 ==========
 export enum OrderType {
   PHYSICAL = 'physical',
