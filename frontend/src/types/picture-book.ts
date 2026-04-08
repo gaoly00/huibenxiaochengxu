@@ -42,7 +42,6 @@ export interface PictureBookRecord {
   digitalEnabled: boolean;
   digitalPrice: number;
   digitalBaiduPanUrl: string;
-  digitalBaiduPanCode: string;
   digitalDeliveryNote: string;
   createdTime: string;
   updatedTime: string;

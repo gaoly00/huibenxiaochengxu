@@ -48,7 +48,6 @@ setupMock({
         digitalEnabled: Mock.mock('@boolean'),
         digitalPrice: Mock.mock('@float(5,50,2,2)'),
         digitalBaiduPanUrl: 'https://pan.baidu.com/s/1example',
-        digitalBaiduPanCode: Mock.mock('@string("lower",4)'),
         digitalDeliveryNote: '购买后自动发送网盘链接',
         createdTime: Mock.mock('@datetime("yyyy-MM-dd HH:mm:ss")'),
         updatedTime: Mock.mock('@datetime("yyyy-MM-dd HH:mm:ss")'),

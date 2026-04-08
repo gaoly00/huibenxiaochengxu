@@ -198,10 +198,7 @@
             <a-form-item field="digitalBaiduPanUrl" :label="$t('pictureBookForm.label.digitalBaiduPanUrl')" :rules="[{ required: true, message: $t('pictureBookForm.rules.digitalBaiduPanUrl') }]">
               <a-input v-model="formData.digitalBaiduPanUrl" :placeholder="$t('pictureBookForm.placeholder.digitalBaiduPanUrl')" />
             </a-form-item>
-            <a-form-item field="digitalBaiduPanCode" :label="$t('pictureBookForm.label.digitalBaiduPanCode')">
-              <a-input v-model="formData.digitalBaiduPanCode" :placeholder="$t('pictureBookForm.placeholder.digitalBaiduPanCode')" />
-            </a-form-item>
-            <a-form-item field="digitalDeliveryNote" :label="$t('pictureBookForm.label.digitalDeliveryNote')">
+<a-form-item field="digitalDeliveryNote" :label="$t('pictureBookForm.label.digitalDeliveryNote')">
               <a-textarea v-model="formData.digitalDeliveryNote" :placeholder="$t('pictureBookForm.placeholder.digitalDeliveryNote')" :auto-size="{ minRows: 2 }" />
             </a-form-item>
           </template>
@@ -298,7 +295,6 @@
     digitalEnabled: false,
     digitalPrice: undefined,
     digitalBaiduPanUrl: '',
-    digitalBaiduPanCode: '',
     digitalDeliveryNote: '',
   });
 
