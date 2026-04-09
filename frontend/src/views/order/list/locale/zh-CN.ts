@@ -56,4 +56,5 @@ export default {
   'order.list.refund': '退款',
   'order.list.refundConfirm': '确定要对该订单进行退款吗？',
   'order.list.refundSuccess': '退款成功',
+  'order.list.exportEmpty': '没有可导出的订单',
 };

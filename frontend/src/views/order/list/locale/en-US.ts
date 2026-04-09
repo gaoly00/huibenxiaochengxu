@@ -56,4 +56,5 @@ export default {
   'order.list.refund': 'Refund',
   'order.list.refundConfirm': 'Are you sure you want to refund this order?',
   'order.list.refundSuccess': 'Refund successfully',
+  'order.list.exportEmpty': 'No orders to export',
 };

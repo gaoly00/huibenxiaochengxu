@@ -119,6 +119,8 @@
         :data="renderData"
         :pagination="pagination"
         :bordered="false"
+        :row-selection="rowSelection"
+        v-model:selectedKeys="selectedKeys"
         @page-change="onPageChange"
       >
         <template #columns>
@@ -255,6 +257,11 @@
   const basePagination: Pagination = { current: 1, pageSize: 20 };
   const pagination = reactive({ ...basePagination, total: 0 });
   const renderData = ref<OrderRecord[]>([]);
+  const selectedKeys = ref<string[]>([]);
+  const rowSelection = reactive({
+    type: 'checkbox' as const,
+    showCheckedAll: true,
+  });
 
   const generateSearchForm = () => ({
     orderNo: '',
@@ -397,7 +404,14 @@
 
   // 导出 Excel
   const handleExport = () => {
-    const rows = renderData.value.map((r) => ({
+    const source = selectedKeys.value.length > 0
+      ? renderData.value.filter((r) => selectedKeys.value.includes(r.id))
+      : renderData.value;
+    if (source.length === 0) {
+      Message.warning(t('order.list.exportEmpty'));
+      return;
+    }
+    const rows = source.map((r) => ({
       [t('order.list.orderNo')]: r.orderNo,
       [t('order.list.buyer')]: r.userNickname,
       [t('order.list.productName')]: r.productName,
