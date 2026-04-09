@@ -53,4 +53,7 @@ export default {
   'order.list.shipSuccess': '发货成功',
   'order.list.export': '导出',
   'order.list.exportSuccess': '导出成功',
+  'order.list.refund': '退款',
+  'order.list.refundConfirm': '确定要对该订单进行退款吗？',
+  'order.list.refundSuccess': '退款成功',
 };

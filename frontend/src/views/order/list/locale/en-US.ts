@@ -53,4 +53,7 @@ export default {
   'order.list.shipSuccess': 'Shipped successfully',
   'order.list.export': 'Export',
   'order.list.exportSuccess': 'Export successfully',
+  'order.list.refund': 'Refund',
+  'order.list.refundConfirm': 'Are you sure you want to refund this order?',
+  'order.list.refundSuccess': 'Refund successfully',
 };

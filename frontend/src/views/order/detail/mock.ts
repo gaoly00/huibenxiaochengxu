@@ -54,6 +54,11 @@ setupMock({
       return successResponseWrap(null);
     });
 
+    // POST /api/order/:id/refund
+    Mock.mock(new RegExp('/api/order/[a-zA-Z0-9-]+/refund'), 'post', () => {
+      return successResponseWrap(null);
+    });
+
     // GET /api/order/:id/delivery-logs
     Mock.mock(new RegExp('/api/order/[a-zA-Z0-9-]+/delivery-logs'), 'get', () => {
       return successResponseWrap(generateDeliveryLogs());

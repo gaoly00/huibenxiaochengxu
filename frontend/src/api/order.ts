@@ -36,3 +36,7 @@ export function manualDelivery(id: string, data: { baiduPanUrl: string; baiduPan
 export function queryDeliveryLogs(orderId: string) {
   return axios.get<DeliveryLogRecord[]>(`/api/order/${orderId}/delivery-logs`);
 }
+
+export function refundOrder(id: string) {
+  return axios.post(`/api/order/${id}/refund`);
+}

@@ -178,7 +178,7 @@
             </template>
           </a-table-column>
           <a-table-column :title="$t('order.list.createdTime')" data-index="createdTime" :width="180" />
-          <a-table-column :title="$t('order.list.operations')" :width="140" fixed="right">
+          <a-table-column :title="$t('order.list.operations')" :width="200" fixed="right">
             <template #cell="{ record }">
               <a-space>
                 <a-button type="text" size="small" @click="viewDetail(record)">
@@ -193,6 +193,15 @@
                 >
                   {{ $t('order.list.ship') }}
                 </a-button>
+                <a-popconfirm
+                  v-if="['paid', 'shipped', 'delivered', 'completed'].includes(record.orderStatus)"
+                  :content="$t('order.list.refundConfirm')"
+                  @ok="handleRefund(record)"
+                >
+                  <a-button type="text" size="small" status="danger">
+                    {{ $t('order.list.refund') }}
+                  </a-button>
+                </a-popconfirm>
               </a-space>
             </template>
           </a-table-column>
@@ -233,7 +242,7 @@
   import { useRouter } from 'vue-router';
   import { Message } from '@arco-design/web-vue';
   import useLoading from '@/hooks/loading';
-  import { queryOrderList, shipOrder } from '@/api/order';
+  import { queryOrderList, shipOrder, refundOrder } from '@/api/order';
   import { OrderRecord, OrderParams } from '@/types/order';
   import { Pagination } from '@/types/global';
   import { OrderStatus, PaymentStatus } from '@/types/enums';
@@ -359,6 +368,17 @@
       await shipOrder(currentShipOrderId.value, { ...shipForm });
       Message.success(t('order.list.shipSuccess'));
       shipModalVisible.value = false;
+      search();
+    } catch {
+      // error handled by interceptor
+    }
+  };
+
+  // 退款
+  const handleRefund = async (record: OrderRecord) => {
+    try {
+      await refundOrder(record.id);
+      Message.success(t('order.list.refundSuccess'));
       search();
     } catch {
       // error handled by interceptor
