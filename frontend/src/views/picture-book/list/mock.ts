@@ -30,6 +30,7 @@ const data = Mock.mock({
       'isHomepageRecommend|1': [true, false],
       'isSmartRecommend|1': [true, false],
       'pageCount': '@integer(10,50)',
+      'salesCount': '@integer(0,500)',
       'updatedTime': '@datetime("yyyy-MM-dd HH:mm:ss")',
     },
   ],

@@ -146,6 +146,11 @@
               {{ record.isHomepageRecommend ? $t('pictureBookList.yes') : $t('pictureBookList.no') }}
             </template>
           </a-table-column>
+          <a-table-column
+            :title="$t('pictureBookList.columns.salesCount')"
+            data-index="salesCount"
+            :width="80"
+          />
           <a-table-column :title="$t('pictureBookList.columns.pdfConvertStatus')" :width="120">
             <template #cell="{ record }">
               <a-tag v-if="record.pdfConvertStatus === 'success'" color="green">{{ $t('pictureBookList.pdfStatus.success') }}</a-tag>

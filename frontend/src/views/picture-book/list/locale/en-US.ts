@@ -15,6 +15,7 @@ export default {
   'pictureBookList.columns.tags': 'Tags',
   'pictureBookList.columns.status': 'Status',
   'pictureBookList.columns.isHomepageRecommend': 'Homepage Recommend',
+  'pictureBookList.columns.salesCount': 'Sales',
   'pictureBookList.columns.pdfConvertStatus': 'PDF Status',
   'pictureBookList.columns.updatedTime': 'Updated Time',
   'pictureBookList.columns.operations': 'Operations',

@@ -15,6 +15,7 @@ export default {
   'pictureBookList.columns.tags': '标签',
   'pictureBookList.columns.status': '状态',
   'pictureBookList.columns.isHomepageRecommend': '首页推荐',
+  'pictureBookList.columns.salesCount': '销量',
   'pictureBookList.columns.pdfConvertStatus': 'PDF状态',
   'pictureBookList.columns.updatedTime': '更新时间',
   'pictureBookList.columns.operations': '操作',
