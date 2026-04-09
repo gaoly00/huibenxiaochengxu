@@ -1,56 +1,6 @@
 import Mock from 'mockjs';
 import setupMock, { successResponseWrap } from '@/utils/setup-mock';
-
-const orderStatuses = [
-  'pending_payment', 'paid', 'shipped', 'delivered',
-  'completed', 'cancelled', 'refunding', 'refunded',
-];
-const paymentStatuses = ['unpaid', 'paid', 'refunded'];
-const shippingStatuses = ['pending', 'shipped', 'delivered'];
-const deliveryStatuses = ['pending', 'delivering', 'delivered', 'failed'];
-
-function generateOrder(isPhysical: boolean) {
-  const unitPrice = Mock.mock('@float(9.9, 199, 1, 2)');
-  const quantity = Mock.mock('@integer(1, 3)');
-  const totalAmount = Number((unitPrice * quantity).toFixed(2));
-  const pointsDeduction = Mock.mock('@integer(0, 50)');
-  const actualAmount = Number(
-    Math.max(totalAmount - pointsDeduction * 0.1, 0).toFixed(2)
-  );
-  return {
-    id: Mock.mock('@guid'),
-    orderNo: `ORD${Mock.mock("@datetime('yyyyMMdd')")}${Mock.mock('@string("number", 6)')}`,
-    userId: Mock.mock('@guid'),
-    userNickname: Mock.mock('@cname'),
-    userAvatar: `https://picsum.photos/seed/${Mock.mock('@integer(1,200)')}/40/40`,
-    orderType: isPhysical ? 'physical' : 'digital',
-    productId: Mock.mock('@guid'),
-    productName: Mock.mock('@ctitle(4, 8)'),
-    productCover: `https://picsum.photos/seed/${Mock.mock('@integer(1,300)')}/80/80`,
-    quantity,
-    unitPrice,
-    totalAmount,
-    actualAmount,
-    pointsDeduction,
-    orderStatus: orderStatuses[Mock.mock('@integer(0, 7)')],
-    paymentStatus: paymentStatuses[Mock.mock('@integer(0, 2)')],
-    paymentTime: Mock.mock('@datetime'),
-    shippingStatus: isPhysical ? shippingStatuses[Mock.mock('@integer(0, 2)')] : '',
-    receiverName: isPhysical ? Mock.mock('@cname') : '',
-    receiverPhone: isPhysical ? Mock.mock(/^1[3-9]\d{9}$/) : '',
-    receiverAddress: isPhysical ? Mock.mock('@county(true)') + Mock.mock('@ctitle(5,10)') : '',
-    logisticsCompany: isPhysical ? Mock.mock('@pick(["顺丰速运","中通快递","圆通速递","韵达快递"])') : '',
-    logisticsNo: isPhysical ? Mock.mock('@string("number", 12)') : '',
-    deliveryStatus: !isPhysical ? deliveryStatuses[Mock.mock('@integer(0, 3)')] : '',
-    deliveryTime: !isPhysical ? Mock.mock('@datetime') : '',
-    baiduPanUrl: !isPhysical ? `https://pan.baidu.com/s/${Mock.mock('@string("lower", 8)')}` : '',
-    baiduPanCode: !isPhysical ? Mock.mock('@string("lower", 4)') : '',
-    deliveryRetryCount: !isPhysical ? Mock.mock('@integer(0, 3)') : 0,
-    remark: Mock.mock('@cparagraph(1)'),
-    createdTime: Mock.mock('@datetime'),
-    updatedTime: Mock.mock('@datetime'),
-  };
-}
+import { orderListData } from '@/views/order/list/mock';
 
 function generateDeliveryLogs() {
   const count = Mock.mock('@integer(3, 5)');
@@ -71,10 +21,12 @@ function generateDeliveryLogs() {
 
 setupMock({
   setup() {
-    // GET /api/order/:id
-    Mock.mock(new RegExp('/api/order/[a-zA-Z0-9-]+$'), 'get', () => {
-      const isPhysical = Mock.mock('@boolean');
-      return successResponseWrap(generateOrder(isPhysical));
+    // GET /api/order/:id — 从列表数据中查找
+    Mock.mock(new RegExp('/api/order/[a-zA-Z0-9-]+$'), 'get', (options: any) => {
+      const idMatch = options.url.match(/\/api\/order\/([a-zA-Z0-9-]+)$/);
+      const id = idMatch ? idMatch[1] : '';
+      const found = orderListData.find((item: any) => item.id === id);
+      return successResponseWrap(found || orderListData[0]);
     });
 
     // PUT /api/order/:id/ship

@@ -132,3 +132,6 @@ setupMock({
     });
   },
 });
+
+// 导出数据供详情 mock 使用
+export { data as orderListData };
