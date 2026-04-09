@@ -100,12 +100,34 @@ setupMock({
       const queryParams = qs.parseUrl(params.url).query as any;
       const current = Number(queryParams.current) || 1;
       const pageSize = Number(queryParams.pageSize) || 20;
+
+      // 筛选
+      let filtered = data;
+      if (queryParams.orderNo) {
+        filtered = filtered.filter((item: any) => item.orderNo.includes(queryParams.orderNo));
+      }
+      if (queryParams.userNickname) {
+        filtered = filtered.filter((item: any) => item.userNickname.includes(queryParams.userNickname));
+      }
+      if (queryParams.productName) {
+        filtered = filtered.filter((item: any) => item.productName.includes(queryParams.productName));
+      }
+      if (queryParams.orderType) {
+        filtered = filtered.filter((item: any) => item.orderType === queryParams.orderType);
+      }
+      if (queryParams.orderStatus) {
+        filtered = filtered.filter((item: any) => item.orderStatus === queryParams.orderStatus);
+      }
+      if (queryParams.paymentStatus) {
+        filtered = filtered.filter((item: any) => item.paymentStatus === queryParams.paymentStatus);
+      }
+
       const start = (current - 1) * pageSize;
       const end = start + pageSize;
-      const list = data.slice(start, end);
+      const list = filtered.slice(start, end);
       return successResponseWrap({
         list,
-        total: data.length,
+        total: filtered.length,
       });
     });
   },
