@@ -30,6 +30,23 @@ for (let i = 0; i < 40; i += 1) {
   );
   const isPhysical = orderType === 'physical';
 
+  // 让 orderStatus 和 paymentStatus/shippingStatus 逻辑一致
+  const orderStatus = orderStatuses[Mock.mock('@integer(0, 7)')];
+  let paymentStatus = 'unpaid';
+  let shippingStatus = 'pending';
+  if (orderStatus === 'pending_payment' || orderStatus === 'cancelled') {
+    paymentStatus = 'unpaid';
+  } else if (orderStatus === 'refunded') {
+    paymentStatus = 'refunded';
+  } else {
+    paymentStatus = 'paid';
+  }
+  if (isPhysical) {
+    if (orderStatus === 'shipped') shippingStatus = 'shipped';
+    else if (orderStatus === 'delivered' || orderStatus === 'completed') shippingStatus = 'delivered';
+    else shippingStatus = 'pending';
+  }
+
   data.push({
     id: Mock.mock('@guid'),
     orderNo: `ORD${Mock.mock("@datetime('yyyyMMdd')")}${Mock.mock(
@@ -51,12 +68,10 @@ for (let i = 0; i < 40; i += 1) {
     totalAmount,
     actualAmount,
     pointsDeduction,
-    orderStatus: orderStatuses[Mock.mock('@integer(0, 7)')],
-    paymentStatus: paymentStatuses[Mock.mock('@integer(0, 2)')],
-    paymentTime: Mock.mock('@datetime'),
-    shippingStatus: isPhysical
-      ? shippingStatuses[Mock.mock('@integer(0, 2)')]
-      : '',
+    orderStatus,
+    paymentStatus,
+    paymentTime: paymentStatus === 'paid' ? Mock.mock('@datetime') : '',
+    shippingStatus: isPhysical ? shippingStatus : '',
     receiverName: isPhysical ? Mock.mock('@cname') : '',
     receiverPhone: isPhysical ? Mock.mock(/^1[3-9]\d{9}$/) : '',
     receiverAddress: isPhysical

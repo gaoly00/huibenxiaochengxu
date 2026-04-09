@@ -176,7 +176,7 @@
                   {{ $t('order.list.viewDetail') }}
                 </a-button>
                 <a-button
-                  v-if="record.orderType === 'physical' && record.shippingStatus === 'pending' && record.paymentStatus === 'paid'"
+                  v-if="record.orderType === 'physical' && record.orderStatus === 'paid' && record.shippingStatus === 'pending'"
                   type="text"
                   size="small"
                   status="success"
