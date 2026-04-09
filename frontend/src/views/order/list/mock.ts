@@ -13,8 +13,6 @@ const orderStatuses = [
   'refunding',
   'refunded',
 ];
-const paymentStatuses = ['unpaid', 'paid', 'refunded'];
-const shippingStatuses = ['pending', 'shipped', 'delivered'];
 const deliveryStatuses = ['pending', 'delivering', 'delivered', 'failed'];
 const orderTypes = ['physical', 'digital'];
 
@@ -43,7 +41,8 @@ for (let i = 0; i < 40; i += 1) {
   }
   if (isPhysical) {
     if (orderStatus === 'shipped') shippingStatus = 'shipped';
-    else if (orderStatus === 'delivered' || orderStatus === 'completed') shippingStatus = 'delivered';
+    else if (orderStatus === 'delivered' || orderStatus === 'completed')
+      shippingStatus = 'delivered';
     else shippingStatus = 'pending';
   }
 
@@ -77,7 +76,9 @@ for (let i = 0; i < 40; i += 1) {
     receiverAddress: isPhysical
       ? Mock.mock('@county(true)') + Mock.mock('@ctitle(5, 10)')
       : '',
-    logisticsCompany: isPhysical ? Mock.mock('@pick(["顺丰速运","中通快递","圆通速递","韵达快递"])') : '',
+    logisticsCompany: isPhysical
+      ? Mock.mock('@pick(["顺丰速运","中通快递","圆通速递","韵达快递"])')
+      : '',
     logisticsNo: isPhysical ? Mock.mock('@string("number", 12)') : '',
     deliveryStatus: !isPhysical
       ? deliveryStatuses[Mock.mock('@integer(0, 3)')]
@@ -104,22 +105,34 @@ setupMock({
       // 筛选
       let filtered = data;
       if (queryParams.orderNo) {
-        filtered = filtered.filter((item: any) => item.orderNo.includes(queryParams.orderNo));
+        filtered = filtered.filter((item: any) =>
+          item.orderNo.includes(queryParams.orderNo)
+        );
       }
       if (queryParams.userNickname) {
-        filtered = filtered.filter((item: any) => item.userNickname.includes(queryParams.userNickname));
+        filtered = filtered.filter((item: any) =>
+          item.userNickname.includes(queryParams.userNickname)
+        );
       }
       if (queryParams.productName) {
-        filtered = filtered.filter((item: any) => item.productName.includes(queryParams.productName));
+        filtered = filtered.filter((item: any) =>
+          item.productName.includes(queryParams.productName)
+        );
       }
       if (queryParams.orderType) {
-        filtered = filtered.filter((item: any) => item.orderType === queryParams.orderType);
+        filtered = filtered.filter(
+          (item: any) => item.orderType === queryParams.orderType
+        );
       }
       if (queryParams.orderStatus) {
-        filtered = filtered.filter((item: any) => item.orderStatus === queryParams.orderStatus);
+        filtered = filtered.filter(
+          (item: any) => item.orderStatus === queryParams.orderStatus
+        );
       }
       if (queryParams.paymentStatus) {
-        filtered = filtered.filter((item: any) => item.paymentStatus === queryParams.paymentStatus);
+        filtered = filtered.filter(
+          (item: any) => item.paymentStatus === queryParams.paymentStatus
+        );
       }
 
       const start = (current - 1) * pageSize;
@@ -134,4 +147,5 @@ setupMock({
 });
 
 // 导出数据供详情 mock 使用
+// eslint-disable-next-line import/prefer-default-export
 export { data as orderListData };
