@@ -158,18 +158,8 @@
               <a-tag v-else color="green">{{ $t('order.list.type.digital') }}</a-tag>
             </template>
           </a-table-column>
-          <a-table-column :title="$t('order.list.totalAmount')" data-index="totalAmount" :width="100">
-            <template #cell="{ record }">¥{{ record.totalAmount }}</template>
-          </a-table-column>
           <a-table-column :title="$t('order.list.actualAmount')" data-index="actualAmount" :width="100">
             <template #cell="{ record }">¥{{ record.actualAmount }}</template>
-          </a-table-column>
-          <a-table-column :title="$t('order.list.paymentStatus')" :width="100">
-            <template #cell="{ record }">
-              <a-tag :color="paymentStatusColorMap[record.paymentStatus] || 'gray'">
-                {{ $t(`order.list.payment.${record.paymentStatus}`) }}
-              </a-tag>
-            </template>
           </a-table-column>
           <a-table-column :title="$t('order.list.orderStatus')" :width="110">
             <template #cell="{ record }">
