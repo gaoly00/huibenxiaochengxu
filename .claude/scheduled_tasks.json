@@ -1,0 +1,11 @@
+{
+  "tasks": [
+    {
+      "id": "a262b98a",
+      "cron": "30 23 * * *",
+      "prompt": "执行 git push：cd c:/Users/dell/Desktop/huibenxiaochengxu && git add -A && git diff --cached --quiet || (git commit -m \"每日自动推送\" && git push origin main)",
+      "createdAt": 1775743589325,
+      "recurring": true
+    }
+  ]
+}

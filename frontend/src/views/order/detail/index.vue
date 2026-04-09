@@ -347,8 +347,8 @@
   const manualForm = reactive({ baiduPanUrl: '', baiduPanCode: '' });
 
   const maskUrl = (url: string) => {
-    if (url.length <= 20) return url.slice(0, 10) + '****';
-    return url.slice(0, 20) + '****';
+    if (url.length <= 20) return `${url.slice(0, 10)}****`;
+    return `${url.slice(0, 20)}****`;
   };
 
   const goBack = () => {
