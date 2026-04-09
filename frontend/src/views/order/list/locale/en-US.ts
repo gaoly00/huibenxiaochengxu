@@ -36,4 +36,19 @@ export default {
   'order.list.payment.unpaid': 'Unpaid',
   'order.list.payment.paid': 'Paid',
   'order.list.payment.refunded': 'Refunded',
+  // Buyer info
+  'order.list.buyer': 'Buyer',
+  'order.list.receiverName': 'Receiver',
+  'order.list.receiverPhone': 'Phone',
+  'order.list.receiverAddress': 'Address',
+  'order.list.copyAll': 'Copy All',
+  'order.list.copied': 'Copied',
+  // Ship
+  'order.list.ship': 'Ship',
+  'order.list.shipTitle': 'Shipping Info',
+  'order.list.logisticsCompany': 'Logistics Company',
+  'order.list.logisticsCompany.placeholder': 'Please select',
+  'order.list.logisticsNo': 'Tracking No',
+  'order.list.logisticsNo.placeholder': 'Please enter tracking number',
+  'order.list.shipSuccess': 'Shipped successfully',
 };

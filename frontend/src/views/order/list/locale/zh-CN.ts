@@ -36,4 +36,19 @@ export default {
   'order.list.payment.unpaid': '未支付',
   'order.list.payment.paid': '已支付',
   'order.list.payment.refunded': '已退款',
+  // 买家信息
+  'order.list.buyer': '买家',
+  'order.list.receiverName': '收货人',
+  'order.list.receiverPhone': '手机',
+  'order.list.receiverAddress': '地址',
+  'order.list.copyAll': '一键复制',
+  'order.list.copied': '已复制',
+  // 发货
+  'order.list.ship': '发货',
+  'order.list.shipTitle': '设置物流信息',
+  'order.list.logisticsCompany': '物流公司',
+  'order.list.logisticsCompany.placeholder': '请选择物流公司',
+  'order.list.logisticsNo': '物流单号',
+  'order.list.logisticsNo.placeholder': '请输入物流单号',
+  'order.list.shipSuccess': '发货成功',
 };
