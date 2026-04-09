@@ -51,4 +51,6 @@ export default {
   'order.list.logisticsNo': 'Tracking No',
   'order.list.logisticsNo.placeholder': 'Please enter tracking number',
   'order.list.shipSuccess': 'Shipped successfully',
+  'order.list.export': 'Export',
+  'order.list.exportSuccess': 'Export successfully',
 };

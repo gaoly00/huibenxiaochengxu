@@ -51,4 +51,6 @@ export default {
   'order.list.logisticsNo': '物流单号',
   'order.list.logisticsNo.placeholder': '请输入物流单号',
   'order.list.shipSuccess': '发货成功',
+  'order.list.export': '导出',
+  'order.list.exportSuccess': '导出成功',
 };

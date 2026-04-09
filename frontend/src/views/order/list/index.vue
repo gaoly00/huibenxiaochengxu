@@ -103,6 +103,15 @@
           </a-space>
         </a-col>
       </a-row>
+      <!-- Toolbar -->
+      <a-row style="margin-bottom: 16px">
+        <a-col :span="24" style="text-align: right">
+          <a-button status="success" @click="handleExport">
+            <template #icon><icon-download /></template>
+            {{ $t('order.list.export') }}
+          </a-button>
+        </a-col>
+      </a-row>
       <!-- Table -->
       <a-table
         row-key="id"
@@ -228,6 +237,7 @@
   import { OrderRecord, OrderParams } from '@/types/order';
   import { Pagination } from '@/types/global';
   import { OrderStatus, PaymentStatus } from '@/types/enums';
+  import * as XLSX from 'xlsx';
 
   const { t } = useI18n();
   const router = useRouter();
@@ -363,6 +373,27 @@
     } catch {
       Message.error('Copy failed');
     }
+  };
+
+  // 导出 Excel
+  const handleExport = () => {
+    const rows = renderData.value.map((r) => ({
+      [t('order.list.orderNo')]: r.orderNo,
+      [t('order.list.buyer')]: r.userNickname,
+      [t('order.list.productName')]: r.productName,
+      [t('order.list.orderType')]: r.orderType === 'physical' ? t('order.list.type.physical') : t('order.list.type.digital'),
+      [t('order.list.actualAmount')]: r.actualAmount,
+      [t('order.list.orderStatus')]: t(`order.list.status.${r.orderStatus}`),
+      [t('order.list.receiverName')]: r.receiverName || '',
+      [t('order.list.receiverPhone')]: r.receiverPhone || '',
+      [t('order.list.receiverAddress')]: r.receiverAddress || '',
+      [t('order.list.createdTime')]: r.createdTime,
+    }));
+    const ws = XLSX.utils.json_to_sheet(rows);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Orders');
+    XLSX.writeFile(wb, `orders_${new Date().toISOString().slice(0, 10)}.xlsx`);
+    Message.success(t('order.list.exportSuccess'));
   };
 
   search();
