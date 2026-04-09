@@ -21,12 +21,16 @@
             </a-tag>
           </a-descriptions-item>
           <a-descriptions-item :label="$t('order.detail.orderStatus')">
-            <a-tag :color="orderStatusColorMap[orderData.orderStatus] || 'gray'">
+            <a-tag
+              :color="orderStatusColorMap[orderData.orderStatus] || 'gray'"
+            >
               {{ $t(`order.detail.status.${orderData.orderStatus}`) }}
             </a-tag>
           </a-descriptions-item>
           <a-descriptions-item :label="$t('order.detail.paymentStatus')">
-            <a-tag :color="paymentStatusColorMap[orderData.paymentStatus] || 'gray'">
+            <a-tag
+              :color="paymentStatusColorMap[orderData.paymentStatus] || 'gray'"
+            >
               {{ $t(`order.detail.payment.${orderData.paymentStatus}`) }}
             </a-tag>
           </a-descriptions-item>
@@ -40,10 +44,19 @@
       </a-card>
 
       <!-- Product Info -->
-      <a-card class="general-card" :title="$t('order.detail.productInfo')" style="margin-top: 16px">
+      <a-card
+        class="general-card"
+        :title="$t('order.detail.productInfo')"
+        style="margin-top: 16px"
+      >
         <a-descriptions :column="3" bordered>
           <a-descriptions-item :label="$t('order.detail.productCover')">
-            <a-image :src="orderData.productCover" width="80" height="80" fit="cover" />
+            <a-image
+              :src="orderData.productCover"
+              width="80"
+              height="80"
+              fit="cover"
+            />
           </a-descriptions-item>
           <a-descriptions-item :label="$t('order.detail.productName')">
             {{ orderData.productName }}
@@ -59,7 +72,11 @@
       </a-card>
 
       <!-- Amount Info -->
-      <a-card class="general-card" :title="$t('order.detail.amountInfo')" style="margin-top: 16px">
+      <a-card
+        class="general-card"
+        :title="$t('order.detail.amountInfo')"
+        style="margin-top: 16px"
+      >
         <a-descriptions :column="3" bordered>
           <a-descriptions-item :label="$t('order.detail.totalAmount')">
             ¥{{ orderData.totalAmount }}
@@ -75,7 +92,11 @@
 
       <!-- Physical Order: Receiver Info -->
       <template v-if="orderData.orderType === 'physical'">
-        <a-card class="general-card" :title="$t('order.detail.receiverInfo')" style="margin-top: 16px">
+        <a-card
+          class="general-card"
+          :title="$t('order.detail.receiverInfo')"
+          style="margin-top: 16px"
+        >
           <a-descriptions :column="3" bordered>
             <a-descriptions-item :label="$t('order.detail.receiverName')">
               {{ orderData.receiverName }}
@@ -89,10 +110,18 @@
           </a-descriptions>
         </a-card>
 
-        <a-card class="general-card" :title="$t('order.detail.shippingInfo')" style="margin-top: 16px">
+        <a-card
+          class="general-card"
+          :title="$t('order.detail.shippingInfo')"
+          style="margin-top: 16px"
+        >
           <a-descriptions :column="3" bordered>
             <a-descriptions-item :label="$t('order.detail.shippingStatus')">
-              <a-tag :color="shippingStatusColorMap[orderData.shippingStatus] || 'gray'">
+              <a-tag
+                :color="
+                  shippingStatusColorMap[orderData.shippingStatus] || 'gray'
+                "
+              >
                 {{ $t(`order.detail.shipping.${orderData.shippingStatus}`) }}
               </a-tag>
             </a-descriptions-item>
@@ -119,10 +148,18 @@
 
       <!-- Digital Order: Delivery Info -->
       <template v-if="orderData.orderType === 'digital'">
-        <a-card class="general-card" :title="$t('order.detail.deliveryInfo')" style="margin-top: 16px">
+        <a-card
+          class="general-card"
+          :title="$t('order.detail.deliveryInfo')"
+          style="margin-top: 16px"
+        >
           <a-descriptions :column="3" bordered>
             <a-descriptions-item :label="$t('order.detail.deliveryStatus')">
-              <a-tag :color="deliveryStatusColorMap[orderData.deliveryStatus] || 'gray'">
+              <a-tag
+                :color="
+                  deliveryStatusColorMap[orderData.deliveryStatus] || 'gray'
+                "
+              >
                 {{ $t(`order.detail.delivery.${orderData.deliveryStatus}`) }}
               </a-tag>
             </a-descriptions-item>
@@ -145,7 +182,9 @@
                 :content="$t('order.detail.retryConfirm')"
                 @ok="handleRetryDelivery"
               >
-                <a-button type="primary">{{ $t('order.detail.retryDelivery') }}</a-button>
+                <a-button type="primary">{{
+                  $t('order.detail.retryDelivery')
+                }}</a-button>
               </a-popconfirm>
               <a-button @click="manualModalVisible = true">
                 {{ $t('order.detail.manualDelivery') }}
@@ -155,14 +194,38 @@
         </a-card>
 
         <!-- Delivery Logs -->
-        <a-card class="general-card" :title="$t('order.detail.deliveryLogs')" style="margin-top: 16px">
-          <a-table :data="deliveryLogs" :pagination="false" :bordered="false" size="small">
+        <a-card
+          class="general-card"
+          :title="$t('order.detail.deliveryLogs')"
+          style="margin-top: 16px"
+        >
+          <a-table
+            :data="deliveryLogs"
+            :pagination="false"
+            :bordered="false"
+            size="small"
+          >
             <template #columns>
-              <a-table-column :title="$t('order.detail.log.action')" data-index="action" />
-              <a-table-column :title="$t('order.detail.log.result')" data-index="result" />
-              <a-table-column :title="$t('order.detail.log.detail')" data-index="detail" />
-              <a-table-column :title="$t('order.detail.log.operator')" data-index="operatorName" />
-              <a-table-column :title="$t('order.detail.log.time')" data-index="createdTime" />
+              <a-table-column
+                :title="$t('order.detail.log.action')"
+                data-index="action"
+              />
+              <a-table-column
+                :title="$t('order.detail.log.result')"
+                data-index="result"
+              />
+              <a-table-column
+                :title="$t('order.detail.log.detail')"
+                data-index="detail"
+              />
+              <a-table-column
+                :title="$t('order.detail.log.operator')"
+                data-index="operatorName"
+              />
+              <a-table-column
+                :title="$t('order.detail.log.time')"
+                data-index="createdTime"
+              />
             </template>
           </a-table>
         </a-card>

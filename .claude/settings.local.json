@@ -7,7 +7,8 @@
       "Bash(rm -f types/product.ts)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(npx prettier:*)"
     ],
     "additionalDirectories": [
       "c:\\Users\\dell\\.claude\\plans"
