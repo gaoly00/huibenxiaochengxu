@@ -221,13 +221,7 @@
       <a-form :model="shipForm" layout="vertical">
         <a-form-item :label="$t('order.list.logisticsCompany')" required>
           <a-select v-model="shipForm.logisticsCompany" :placeholder="$t('order.list.logisticsCompany.placeholder')">
-            <a-option value="顺丰速运">顺丰速运</a-option>
-            <a-option value="中通快递">中通快递</a-option>
-            <a-option value="圆通速递">圆通速递</a-option>
-            <a-option value="韵达快递">韵达快递</a-option>
             <a-option value="申通快递">申通快递</a-option>
-            <a-option value="极兔速递">极兔速递</a-option>
-            <a-option value="邮政快递包裹">邮政快递包裹</a-option>
           </a-select>
         </a-form-item>
         <a-form-item :label="$t('order.list.logisticsNo')" required>
