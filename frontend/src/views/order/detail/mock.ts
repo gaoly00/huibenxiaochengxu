@@ -30,7 +30,14 @@ setupMock({
     });
 
     // PUT /api/order/:id/ship
-    Mock.mock(new RegExp('/api/order/[a-zA-Z0-9-]+/ship'), 'put', () => {
+    Mock.mock(new RegExp('/api/order/[a-zA-Z0-9-]+/ship'), 'put', (options: any) => {
+      const idMatch = options.url.match(/\/api\/order\/([a-zA-Z0-9-]+)\/ship/);
+      const id = idMatch ? idMatch[1] : '';
+      const order = orderListData.find((item: any) => item.id === id);
+      if (order) {
+        order.orderStatus = 'shipped';
+        order.shippingStatus = 'shipped';
+      }
       return successResponseWrap(null);
     });
 
@@ -55,7 +62,14 @@ setupMock({
     });
 
     // POST /api/order/:id/refund
-    Mock.mock(new RegExp('/api/order/[a-zA-Z0-9-]+/refund'), 'post', () => {
+    Mock.mock(new RegExp('/api/order/[a-zA-Z0-9-]+/refund'), 'post', (options: any) => {
+      const idMatch = options.url.match(/\/api\/order\/([a-zA-Z0-9-]+)\/refund/);
+      const id = idMatch ? idMatch[1] : '';
+      const order = orderListData.find((item: any) => item.id === id);
+      if (order) {
+        order.orderStatus = 'refunded';
+        order.paymentStatus = 'refunded';
+      }
       return successResponseWrap(null);
     });
 
