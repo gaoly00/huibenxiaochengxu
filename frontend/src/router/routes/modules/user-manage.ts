@@ -33,6 +33,26 @@ const USER_MANAGE: AppRouteRecordRaw = {
         hideInMenu: true,
       },
     },
+    {
+      path: 'level',
+      name: 'MemberLevel',
+      component: () => import('@/views/user-manage/level/index.vue'),
+      meta: {
+        locale: 'menu.userManage.level',
+        requiresAuth: true,
+        roles: ['*'],
+      },
+    },
+    {
+      path: 'points-rule',
+      name: 'PointsRule',
+      component: () => import('@/views/user-manage/points-rule/index.vue'),
+      meta: {
+        locale: 'menu.userManage.pointsRule',
+        requiresAuth: true,
+        roles: ['*'],
+      },
+    },
   ],
 };
 

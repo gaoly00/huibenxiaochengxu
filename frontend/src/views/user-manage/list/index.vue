@@ -79,17 +79,36 @@
           </a-table-column>
           <a-table-column :title="$t('userManage.list.nickname')" data-index="nickname" :width="120" />
           <a-table-column :title="$t('userManage.list.phone')" data-index="phone" :width="130" />
-          <a-table-column :title="$t('userManage.list.points')" data-index="points" :width="80" />
+          <a-table-column :title="$t('userManage.list.points')" :width="100">
+            <template #cell="{ record }">
+              <span :style="{ color: record.points >= 2000 ? '#f5a623' : record.points >= 500 ? '#0fc6c2' : '' }">
+                {{ record.points }}
+              </span>
+            </template>
+          </a-table-column>
+          <a-table-column :title="$t('userManage.list.memberLevel')" :width="100">
+            <template #cell="{ record }">
+              <a-tag :color="getMemberLevelColor(record.points)">{{ getMemberLevelName(record.points) }}</a-tag>
+            </template>
+          </a-table-column>
+          <a-table-column :title="$t('userManage.list.totalPaidAmount')" :width="110">
+            <template #cell="{ record }">¥{{ record.totalPaidAmount }}</template>
+          </a-table-column>
           <a-table-column :title="$t('userManage.list.inviterNickname')" data-index="inviterNickname" :width="120">
             <template #cell="{ record }">{{ record.inviterNickname || '-' }}</template>
           </a-table-column>
           <a-table-column :title="$t('userManage.list.distributionLevel')" data-index="distributionLevel" :width="100" />
           <a-table-column :title="$t('userManage.list.orderCount')" data-index="orderCount" :width="80" />
           <a-table-column :title="$t('userManage.list.lastOrderTime')" data-index="lastOrderTime" :width="180" />
-          <a-table-column :title="$t('userManage.list.status')" :width="80">
+          <a-table-column :title="$t('userManage.list.status')" :width="100">
             <template #cell="{ record }">
-              <a-tag v-if="record.status === 'active'" color="green">{{ $t('userManage.list.status.active') }}</a-tag>
-              <a-tag v-else color="red">{{ $t('userManage.list.status.disabled') }}</a-tag>
+              <a-switch
+                :model-value="record.status === 'active'"
+                @change="(val: boolean) => handleToggleStatus(record, val)"
+              >
+                <template #checked>{{ $t('userManage.list.status.active') }}</template>
+                <template #unchecked>{{ $t('userManage.list.status.disabled') }}</template>
+              </a-switch>
             </template>
           </a-table-column>
           <a-table-column :title="$t('userManage.list.registrationTime')" data-index="registrationTime" :width="180" />
@@ -141,7 +160,7 @@
   import { useRouter } from 'vue-router';
   import { Message } from '@arco-design/web-vue';
   import useLoading from '@/hooks/loading';
-  import { queryUserList, adjustUserPoints } from '@/api/user-manage';
+  import { queryUserList, adjustUserPoints, toggleUserStatus } from '@/api/user-manage';
   import { BusinessUserRecord, BusinessUserParams, PointsAdjustForm } from '@/types/business-user';
   import { Pagination } from '@/types/global';
   import { UserStatus, PointsAdjustType } from '@/types/enums';
@@ -235,6 +254,32 @@
       search();
     } finally {
       adjustLoading.value = false;
+    }
+  };
+
+  // 会员等级
+  const getMemberLevelName = (points: number) => {
+    if (points >= 5000) return t('userManage.list.level.diamond');
+    if (points >= 2000) return t('userManage.list.level.gold');
+    if (points >= 500) return t('userManage.list.level.silver');
+    return t('userManage.list.level.normal');
+  };
+  const getMemberLevelColor = (points: number) => {
+    if (points >= 5000) return 'purple';
+    if (points >= 2000) return 'orangered';
+    if (points >= 500) return 'cyan';
+    return 'gray';
+  };
+
+  // 启用/禁用
+  const handleToggleStatus = async (record: BusinessUserRecord, val: boolean) => {
+    const newStatus = val ? 'active' : 'disabled';
+    try {
+      await toggleUserStatus(record.id, newStatus);
+      record.status = newStatus as any;
+      Message.success(t('userManage.list.toggleStatus.success'));
+    } catch {
+      // error handled by interceptor
     }
   };
 

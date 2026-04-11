@@ -2,54 +2,7 @@ import Mock from 'mockjs';
 import qs from 'query-string';
 import setupMock, { successResponseWrap } from '@/utils/setup-mock';
 import { MockParams } from '@/types/mock';
-
-// Mock user detail
-const generateUserDetail = () => {
-  const points = Mock.mock('@integer(0, 5000)');
-  const hasInviter = Mock.mock('@boolean');
-  const hasDist = Mock.mock('@boolean');
-  return {
-    id: Mock.mock('@guid'),
-    openId: `oXXXX${Mock.mock('@string("lower", 20)')}`,
-    nickname: Mock.mock('@cname'),
-    avatar: `https://picsum.photos/seed/${Mock.mock('@integer(1,300)')}/80/80`,
-    phone: `1${Mock.mock('@string("number", 10)')}`,
-    points,
-    totalPoints: points + Mock.mock('@integer(0, 3000)'),
-    status: Mock.mock('@pick(["active", "disabled"])'),
-    inviterId: hasInviter ? Mock.mock('@guid') : null,
-    inviterNickname: hasInviter ? Mock.mock('@cname') : null,
-    distributionLevel: Mock.mock('@integer(0, 2)'),
-    distributionParentId: hasDist ? Mock.mock('@guid') : null,
-    distributionParentNickname: hasDist ? Mock.mock('@cname') : null,
-    totalCommission: Mock.mock('@float(0, 500, 0, 2)'),
-    orderCount: Mock.mock('@integer(0, 50)'),
-    lastOrderTime: Mock.mock('@datetime'),
-    remark: Mock.mock('@cparagraph(1)'),
-    registrationTime: Mock.mock('@datetime'),
-    updatedTime: Mock.mock('@datetime'),
-  };
-};
-
-// Mock points records
-const pointsRecords: any[] = [];
-const changeTypes = ['register', 'check_in', 'showcase', 'purchase', 'deduction', 'admin_adjust'];
-for (let i = 0; i < 20; i += 1) {
-  const changeType = changeTypes[Mock.mock('@integer(0, 5)')];
-  const isPositive = ['register', 'check_in', 'showcase', 'admin_adjust'].includes(changeType);
-  const pts = Mock.mock('@integer(1, 200)');
-  pointsRecords.push({
-    id: Mock.mock('@guid'),
-    userId: Mock.mock('@guid'),
-    userNickname: Mock.mock('@cname'),
-    changeType,
-    points: isPositive ? pts : -pts,
-    balance: Mock.mock('@integer(0, 5000)'),
-    reason: Mock.mock('@ctitle(4, 8)'),
-    remark: '',
-    createdTime: Mock.mock('@datetime'),
-  });
-}
+import { userListData, userPointsRecords } from '@/views/user-manage/list/mock';
 
 // Mock orders for user
 const orderStatuses = ['pending_payment', 'paid', 'shipped', 'delivered', 'completed', 'cancelled', 'refunding', 'refunded'];
@@ -93,9 +46,12 @@ for (let i = 0; i < 6; i += 1) {
 
 setupMock({
   setup() {
-    // GET user detail
-    Mock.mock(new RegExp('/api/user-manage/[a-zA-Z0-9-]+$'), 'get', () => {
-      return successResponseWrap(generateUserDetail());
+    // GET user detail — 从列表数据中查找
+    Mock.mock(new RegExp('/api/user-manage/[a-zA-Z0-9-]+$'), 'get', (options: any) => {
+      const idMatch = options.url.match(/\/api\/user-manage\/([a-zA-Z0-9-]+)$/);
+      const id = idMatch ? idMatch[1] : '';
+      const found = userListData.find((item: any) => item.id === id);
+      return successResponseWrap(found || userListData[0]);
     });
 
     // PUT user remark
@@ -111,8 +67,8 @@ setupMock({
       const start = (current - 1) * pageSize;
       const end = start + pageSize;
       return successResponseWrap({
-        list: pointsRecords.slice(start, end),
-        total: pointsRecords.length,
+        list: userPointsRecords.slice(start, end),
+        total: userPointsRecords.length,
       });
     });
 

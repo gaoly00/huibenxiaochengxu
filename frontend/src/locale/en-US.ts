@@ -14,6 +14,8 @@ import localeOrderDetail from '@/views/order/detail/locale/en-US';
 // User
 import localeUserList from '@/views/user-manage/list/locale/en-US';
 import localeUserDetail from '@/views/user-manage/detail/locale/en-US';
+import localeUserLevel from '@/views/user-manage/level/locale/en-US';
+import localeUserPointsRule from '@/views/user-manage/points-rule/locale/en-US';
 // Review
 import localeComments from '@/views/review/comments/locale/en-US';
 import localeShowcases from '@/views/review/showcases/locale/en-US';
@@ -49,6 +51,8 @@ export default {
   'menu.userManage': 'Users',
   'menu.userManage.list': 'User List',
   'menu.userManage.detail': 'User Detail',
+  'menu.userManage.level': 'Member Levels',
+  'menu.userManage.pointsRule': 'Points Rules',
   'menu.review': 'Reviews',
   'menu.review.comments': 'Comments',
   'menu.review.showcases': 'Showcases',
@@ -80,6 +84,8 @@ export default {
   ...localeOrderDetail,
   ...localeUserList,
   ...localeUserDetail,
+  ...localeUserLevel,
+  ...localeUserPointsRule,
   ...localeComments,
   ...localeShowcases,
   ...localePoints,

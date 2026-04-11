@@ -31,4 +31,11 @@ export default {
   'userManage.list.adjustPoints.remark': '备注',
   'userManage.list.adjustPoints.remark.placeholder': '请输入备注（选填）',
   'userManage.list.adjustPoints.success': '积分调整成功',
+  'userManage.list.memberLevel': '会员等级',
+  'userManage.list.totalPaidAmount': '付款总额',
+  'userManage.list.level.normal': '普通会员',
+  'userManage.list.level.silver': '银卡会员',
+  'userManage.list.level.gold': '金卡会员',
+  'userManage.list.level.diamond': '钻石会员',
+  'userManage.list.toggleStatus.success': '状态切换成功',
 };

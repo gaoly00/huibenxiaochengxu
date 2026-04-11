@@ -31,4 +31,11 @@ export default {
   'userManage.list.adjustPoints.remark': 'Remark',
   'userManage.list.adjustPoints.remark.placeholder': 'Please enter remark (optional)',
   'userManage.list.adjustPoints.success': 'Points adjusted successfully',
+  'userManage.list.memberLevel': 'Member Level',
+  'userManage.list.totalPaidAmount': 'Total Paid',
+  'userManage.list.level.normal': 'Normal',
+  'userManage.list.level.silver': 'Silver',
+  'userManage.list.level.gold': 'Gold',
+  'userManage.list.level.diamond': 'Diamond',
+  'userManage.list.toggleStatus.success': 'Status updated successfully',
 };

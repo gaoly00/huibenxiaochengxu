@@ -14,6 +14,8 @@ import localeOrderDetail from '@/views/order/detail/locale/zh-CN';
 // 用户
 import localeUserList from '@/views/user-manage/list/locale/zh-CN';
 import localeUserDetail from '@/views/user-manage/detail/locale/zh-CN';
+import localeUserLevel from '@/views/user-manage/level/locale/zh-CN';
+import localeUserPointsRule from '@/views/user-manage/points-rule/locale/zh-CN';
 // 评论晒单
 import localeComments from '@/views/review/comments/locale/zh-CN';
 import localeShowcases from '@/views/review/showcases/locale/zh-CN';
@@ -49,6 +51,8 @@ export default {
   'menu.userManage': '用户管理',
   'menu.userManage.list': '用户列表',
   'menu.userManage.detail': '用户详情',
+  'menu.userManage.level': '会员等级',
+  'menu.userManage.pointsRule': '积分规则',
   'menu.review': '评论与晒单',
   'menu.review.comments': '评论管理',
   'menu.review.showcases': '晒单管理',
@@ -80,6 +84,8 @@ export default {
   ...localeOrderDetail,
   ...localeUserList,
   ...localeUserDetail,
+  ...localeUserLevel,
+  ...localeUserPointsRule,
   ...localeComments,
   ...localeShowcases,
   ...localePoints,

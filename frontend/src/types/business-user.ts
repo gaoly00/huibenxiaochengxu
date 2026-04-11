@@ -19,6 +19,7 @@ export interface BusinessUserRecord {
   totalCommission: number;
   // 统计
   orderCount: number;
+  totalPaidAmount: number;
   lastOrderTime: string;
   remark: string;
   registrationTime: string;
@@ -70,4 +71,32 @@ export interface PointsAdjustForm {
   points: number;
   reason: string;
   remark: string;
+}
+
+// 会员等级
+export interface MemberLevelRecord {
+  id: string;
+  name: string;
+  minPoints: number;
+  discount: number; // 折扣百分比，如 95 表示 95折
+  sort: number;
+}
+
+// 积分规则配置
+export interface PointsRuleConfig {
+  // 获取规则
+  registerEnabled: boolean;
+  registerPoints: number;
+  checkInEnabled: boolean;
+  checkInPoints: number;
+  consumeEnabled: boolean;
+  consumePerYuan: number; // 每消费X元
+  consumePoints: number; // 获Y积分
+  reviewEnabled: boolean;
+  reviewPoints: number;
+  // 消耗规则
+  deductionEnabled: boolean;
+  deductionPerYuan: number; // 抵扣X元
+  deductionPoints: number; // 需Y积分
+  maxDeductionPercent: number; // 最大抵扣比例 0-100
 }

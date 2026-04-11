@@ -29,6 +29,10 @@ export function addUserRemark(id: string, remark: string) {
   return axios.put(`/api/user-manage/${id}/remark`, { remark });
 }
 
+export function toggleUserStatus(id: string, status: string) {
+  return axios.put(`/api/user-manage/${id}/status`, { status });
+}
+
 export function queryPointsRecords(params: PointsRecordParams) {
   return axios.get<PointsRecordListRes>('/api/user-manage/points-records', {
     params,

@@ -14,6 +14,8 @@ import '@/views/order/list/mock';
 import '@/views/order/detail/mock';
 import '@/views/user-manage/list/mock';
 import '@/views/user-manage/detail/mock';
+import '@/views/user-manage/level/mock';
+import '@/views/user-manage/points-rule/mock';
 // P1
 import '@/views/review/comments/mock';
 import '@/views/review/showcases/mock';
