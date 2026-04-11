@@ -68,8 +68,8 @@ setupMock({
     });
 
     // PUT toggle user status
-    Mock.mock(new RegExp('/api/user-manage/[a-zA-Z0-9-]+/status'), 'put', (options: any) => {
-      const idMatch = options.url.match(/\/api\/user-manage\/([a-zA-Z0-9-]+)\/status/);
+    Mock.mock(new RegExp('/api/user-manage/[0-9a-fA-F]{8}-[0-9a-fA-F-]+/status'), 'put', (options: any) => {
+      const idMatch = options.url.match(/\/api\/user-manage\/([0-9a-fA-F-]+)\/status/);
       const id = idMatch ? idMatch[1] : '';
       const body = JSON.parse(options.body);
       const user = data.find((item: any) => item.id === id);

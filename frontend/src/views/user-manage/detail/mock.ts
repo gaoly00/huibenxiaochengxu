@@ -46,16 +46,16 @@ for (let i = 0; i < 6; i += 1) {
 
 setupMock({
   setup() {
-    // GET user detail — 从列表数据中查找
-    Mock.mock(new RegExp('/api/user-manage/[a-zA-Z0-9-]+$'), 'get', (options: any) => {
-      const idMatch = options.url.match(/\/api\/user-manage\/([a-zA-Z0-9-]+)$/);
+    // GET user detail — 从列表数据中查找（只匹配 UUID 格式的 id）
+    Mock.mock(new RegExp('/api/user-manage/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'), 'get', (options: any) => {
+      const idMatch = options.url.match(/\/api\/user-manage\/([0-9a-fA-F-]+)$/);
       const id = idMatch ? idMatch[1] : '';
       const found = userListData.find((item: any) => item.id === id);
       return successResponseWrap(found || userListData[0]);
     });
 
     // PUT user remark
-    Mock.mock(new RegExp('/api/user-manage/[a-zA-Z0-9-]+/remark'), 'put', () => {
+    Mock.mock(new RegExp('/api/user-manage/[0-9a-fA-F]{8}-[0-9a-fA-F-]+/remark'), 'put', () => {
       return successResponseWrap(true);
     });
 
