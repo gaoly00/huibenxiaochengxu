@@ -22,16 +22,6 @@ const REVIEW: AppRouteRecordRaw = {
         roles: ['*'],
       },
     },
-    {
-      path: 'showcases',
-      name: 'ReviewShowcases',
-      component: () => import('@/views/review/showcases/index.vue'),
-      meta: {
-        locale: 'menu.review.showcases',
-        requiresAuth: true,
-        roles: ['*'],
-      },
-    },
   ],
 };
 

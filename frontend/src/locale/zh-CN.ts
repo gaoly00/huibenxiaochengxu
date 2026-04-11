@@ -18,10 +18,7 @@ import localeUserLevel from '@/views/user-manage/level/locale/zh-CN';
 import localeUserPointsRule from '@/views/user-manage/points-rule/locale/zh-CN';
 // 评论晒单
 import localeComments from '@/views/review/comments/locale/zh-CN';
-import localeShowcases from '@/views/review/showcases/locale/zh-CN';
 // 营销
-import localePoints from '@/views/marketing/points/locale/zh-CN';
-import localeCheckin from '@/views/marketing/checkin/locale/zh-CN';
 import localeDistribution from '@/views/marketing/distribution/locale/zh-CN';
 // 智能选书
 import localeSmartKeywords from '@/views/smart-recommend/keywords/locale/zh-CN';
@@ -54,11 +51,8 @@ export default {
   'menu.userManage.level': '会员等级',
   'menu.userManage.pointsRule': '积分规则',
   'menu.review': '评论与晒单',
-  'menu.review.comments': '评论管理',
-  'menu.review.showcases': '晒单管理',
+  'menu.review.comments': '评价管理',
   'menu.marketing': '营销配置',
-  'menu.marketing.points': '积分规则',
-  'menu.marketing.checkin': '签到规则',
   'menu.marketing.distribution': '分销规则',
   'menu.smartRecommend': '智能选书',
   'menu.smartRecommend.keywords': '关键词映射',
@@ -87,9 +81,6 @@ export default {
   ...localeUserLevel,
   ...localeUserPointsRule,
   ...localeComments,
-  ...localeShowcases,
-  ...localePoints,
-  ...localeCheckin,
   ...localeDistribution,
   ...localeSmartKeywords,
   ...localeSmartTemplates,

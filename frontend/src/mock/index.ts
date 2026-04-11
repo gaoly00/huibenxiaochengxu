@@ -18,9 +18,6 @@ import '@/views/user-manage/level/mock';
 import '@/views/user-manage/points-rule/mock';
 // P1
 import '@/views/review/comments/mock';
-import '@/views/review/showcases/mock';
-import '@/views/marketing/points/mock';
-import '@/views/marketing/checkin/mock';
 import '@/views/marketing/distribution/mock';
 // P2
 import '@/views/smart-recommend/keywords/mock';

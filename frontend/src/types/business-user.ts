@@ -92,8 +92,9 @@ export interface PointsRuleConfig {
   consumeEnabled: boolean;
   consumePerYuan: number; // 每消费X元
   consumePoints: number; // 获Y积分
-  reviewEnabled: boolean;
-  reviewPoints: number;
+  commentEnabled: boolean;
+  commentPoints: number; // 评论奖励积分
+  imagePoints: number; // 晒图额外积分
   // 消耗规则
   deductionEnabled: boolean;
   deductionPerYuan: number; // 抵扣X元

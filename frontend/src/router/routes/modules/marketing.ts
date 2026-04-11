@@ -13,26 +13,6 @@ const MARKETING: AppRouteRecordRaw = {
   },
   children: [
     {
-      path: 'points',
-      name: 'MarketingPoints',
-      component: () => import('@/views/marketing/points/index.vue'),
-      meta: {
-        locale: 'menu.marketing.points',
-        requiresAuth: true,
-        roles: ['*'],
-      },
-    },
-    {
-      path: 'checkin',
-      name: 'MarketingCheckin',
-      component: () => import('@/views/marketing/checkin/index.vue'),
-      meta: {
-        locale: 'menu.marketing.checkin',
-        requiresAuth: true,
-        roles: ['*'],
-      },
-    },
-    {
       path: 'distribution',
       name: 'MarketingDistribution',
       component: () => import('@/views/marketing/distribution/index.vue'),

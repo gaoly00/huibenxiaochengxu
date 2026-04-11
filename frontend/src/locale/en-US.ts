@@ -18,10 +18,7 @@ import localeUserLevel from '@/views/user-manage/level/locale/en-US';
 import localeUserPointsRule from '@/views/user-manage/points-rule/locale/en-US';
 // Review
 import localeComments from '@/views/review/comments/locale/en-US';
-import localeShowcases from '@/views/review/showcases/locale/en-US';
 // Marketing
-import localePoints from '@/views/marketing/points/locale/en-US';
-import localeCheckin from '@/views/marketing/checkin/locale/en-US';
 import localeDistribution from '@/views/marketing/distribution/locale/en-US';
 // Smart Recommend
 import localeSmartKeywords from '@/views/smart-recommend/keywords/locale/en-US';
@@ -54,11 +51,8 @@ export default {
   'menu.userManage.level': 'Member Levels',
   'menu.userManage.pointsRule': 'Points Rules',
   'menu.review': 'Reviews',
-  'menu.review.comments': 'Comments',
-  'menu.review.showcases': 'Showcases',
+  'menu.review.comments': 'Reviews',
   'menu.marketing': 'Marketing',
-  'menu.marketing.points': 'Points Rules',
-  'menu.marketing.checkin': 'Check-in Rules',
   'menu.marketing.distribution': 'Distribution Rules',
   'menu.smartRecommend': 'Smart Recommend',
   'menu.smartRecommend.keywords': 'Keyword Mapping',
@@ -87,9 +81,6 @@ export default {
   ...localeUserLevel,
   ...localeUserPointsRule,
   ...localeComments,
-  ...localeShowcases,
-  ...localePoints,
-  ...localeCheckin,
   ...localeDistribution,
   ...localeSmartKeywords,
   ...localeSmartTemplates,

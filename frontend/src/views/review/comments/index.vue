@@ -17,14 +17,16 @@
                   <a-input
                     v-model="formModel.userNickname"
                     :placeholder="$t('reviewComments.form.userNickname.placeholder')"
+                    allow-clear
                   />
                 </a-form-item>
               </a-col>
               <a-col :span="8">
-                <a-form-item field="targetName" :label="$t('reviewComments.form.targetName')">
+                <a-form-item field="productName" :label="$t('reviewComments.form.productName')">
                   <a-input
-                    v-model="formModel.targetName"
-                    :placeholder="$t('reviewComments.form.targetName.placeholder')"
+                    v-model="formModel.productName"
+                    :placeholder="$t('reviewComments.form.productName.placeholder')"
+                    allow-clear
                   />
                 </a-form-item>
               </a-col>
@@ -44,6 +46,7 @@
             </a-row>
           </a-form>
         </a-col>
+        <!-- PLACEHOLDER_BUTTONS -->
         <a-divider style="height: 40px" direction="vertical" />
         <a-col :flex="'86px'" style="text-align: right">
           <a-space :size="18">
@@ -71,54 +74,52 @@
         <template #columns>
           <a-table-column :title="$t('reviewComments.columns.id')" data-index="id" :width="80" />
           <a-table-column :title="$t('reviewComments.columns.userNickname')" data-index="userNickname" :width="120" />
-          <a-table-column :title="$t('reviewComments.columns.targetType')" :width="100">
-            <template #cell="{ record }">
-              <a-tag v-if="record.targetType === 'pictureBook'" color="blue">
-                {{ $t('reviewComments.targetType.pictureBook') }}
-              </a-tag>
-              <a-tag v-else color="green">
-                {{ $t('reviewComments.targetType.product') }}
-              </a-tag>
-            </template>
-          </a-table-column>
-          <a-table-column :title="$t('reviewComments.columns.targetName')" data-index="targetName" :width="140" ellipsis />
+          <a-table-column :title="$t('reviewComments.columns.productName')" data-index="productName" :width="140" ellipsis />
           <a-table-column :title="$t('reviewComments.columns.content')" data-index="content" :width="200" ellipsis />
           <a-table-column :title="$t('reviewComments.columns.rating')" :width="140">
             <template #cell="{ record }">
               <a-rate :model-value="record.rating" readonly />
             </template>
           </a-table-column>
+          <a-table-column :title="$t('reviewComments.columns.imageCount')" :width="80">
+            <template #cell="{ record }">
+              <a-badge v-if="record.imageCount > 0" :count="record.imageCount" />
+              <span v-else>0</span>
+            </template>
+          </a-table-column>
           <a-table-column :title="$t('reviewComments.columns.status')" :width="100">
             <template #cell="{ record }">
-              <a-tag v-if="record.status === 'pending'" color="orange">
-                {{ $t('reviewComments.status.pending') }}
-              </a-tag>
-              <a-tag v-else-if="record.status === 'approved'" color="green">
-                {{ $t('reviewComments.status.approved') }}
-              </a-tag>
-              <a-tag v-else color="red">
-                {{ $t('reviewComments.status.rejected') }}
-              </a-tag>
+              <a-tag v-if="record.status === 'pending'" color="orange">{{ $t('reviewComments.status.pending') }}</a-tag>
+              <a-tag v-else-if="record.status === 'approved'" color="green">{{ $t('reviewComments.status.approved') }}</a-tag>
+              <a-tag v-else color="red">{{ $t('reviewComments.status.rejected') }}</a-tag>
+            </template>
+          </a-table-column>
+          <a-table-column :title="$t('reviewComments.columns.rewardPoints')" :width="100">
+            <template #cell="{ record }">
+              <span v-if="record.rewardPoints > 0" style="color: #f5a623">+{{ record.rewardPoints }}</span>
+              <span v-else>-</span>
             </template>
           </a-table-column>
           <a-table-column :title="$t('reviewComments.columns.createdTime')" data-index="createdTime" :width="180" />
           <a-table-column :title="$t('reviewComments.columns.operations')" :width="200" fixed="right">
             <template #cell="{ record }">
               <a-space>
-                <a-popconfirm :content="$t('reviewComments.operation.approve.confirm')" @ok="handleApprove(record)">
-                  <a-button type="text" size="small" status="success">
-                    {{ $t('reviewComments.operation.approve') }}
-                  </a-button>
+                <a-popconfirm
+                  v-if="record.status === 'pending'"
+                  :content="$t('reviewComments.operation.approve.confirm')"
+                  @ok="handleApprove(record)"
+                >
+                  <a-button type="text" size="small" status="success">{{ $t('reviewComments.operation.approve') }}</a-button>
                 </a-popconfirm>
-                <a-popconfirm :content="$t('reviewComments.operation.reject.confirm')" @ok="handleReject(record)">
-                  <a-button type="text" size="small" status="warning">
-                    {{ $t('reviewComments.operation.reject') }}
-                  </a-button>
+                <a-popconfirm
+                  v-if="record.status === 'pending'"
+                  :content="$t('reviewComments.operation.reject.confirm')"
+                  @ok="handleReject(record)"
+                >
+                  <a-button type="text" size="small" status="warning">{{ $t('reviewComments.operation.reject') }}</a-button>
                 </a-popconfirm>
                 <a-popconfirm :content="$t('reviewComments.operation.delete.confirm')" @ok="handleDelete(record)">
-                  <a-button type="text" size="small" status="danger">
-                    {{ $t('reviewComments.operation.delete') }}
-                  </a-button>
+                  <a-button type="text" size="small" status="danger">{{ $t('reviewComments.operation.delete') }}</a-button>
                 </a-popconfirm>
               </a-space>
             </template>
@@ -129,35 +130,32 @@
   </div>
 </template>
 
+<!-- PLACEHOLDER_SCRIPT -->
 <script lang="ts" setup>
   import { ref, reactive } from 'vue';
   import { useI18n } from 'vue-i18n';
-  import useLoading from '@/hooks/loading';
-  import { Message } from '@arco-design/web-vue';
   import axios from 'axios';
+  import { Message } from '@arco-design/web-vue';
+  import useLoading from '@/hooks/loading';
 
   const { t } = useI18n();
   const { loading, setLoading } = useLoading(false);
-  const renderData = ref([]);
+  const renderData = ref<any[]>([]);
+
   const formModel = reactive({
     userNickname: '',
-    targetName: '',
+    productName: '',
     status: '',
   });
 
   const basePagination = { current: 1, pageSize: 10 };
-  const pagination = reactive({
-    ...basePagination,
-    showTotal: true,
-    showPageSize: true,
-    total: 0,
-  });
+  const pagination = reactive({ ...basePagination, showTotal: true, total: 0 });
 
-  const fetchData = async (page = basePagination.current, pageSize = basePagination.pageSize) => {
+  const fetchData = async (page = 1) => {
     setLoading(true);
     try {
       const { data } = await axios.get('/api/review/comments', {
-        params: { page, pageSize, ...formModel },
+        params: { page, pageSize: basePagination.pageSize, ...formModel },
       });
       renderData.value = data.data.list;
       pagination.total = data.data.total;
@@ -167,20 +165,14 @@
     }
   };
 
-  const search = () => {
-    fetchData(1);
-  };
-
+  const search = () => fetchData(1);
   const reset = () => {
     formModel.userNickname = '';
-    formModel.targetName = '';
+    formModel.productName = '';
     formModel.status = '';
     fetchData(1);
   };
-
-  const onPageChange = (page: number) => {
-    fetchData(page);
-  };
+  const onPageChange = (page: number) => fetchData(page);
 
   const handleApprove = async (record: any) => {
     await axios.put(`/api/review/comments/approve/${record.id}`);

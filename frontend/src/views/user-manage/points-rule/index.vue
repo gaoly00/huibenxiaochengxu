@@ -48,16 +48,27 @@
             />
           </a-space>
         </a-form-item>
-        <a-form-item :label="$t('userManage.pointsRule.review')">
+        <a-form-item :label="$t('userManage.pointsRule.comment')">
           <a-space>
-            <a-switch v-model="form.reviewEnabled" />
+            <a-switch v-model="form.commentEnabled" />
             <a-input-number
-              v-model="form.reviewPoints"
+              v-model="form.commentPoints"
               :min="0"
-              :disabled="!form.reviewEnabled"
+              :disabled="!form.commentEnabled"
               style="width: 140px"
             />
-            <span>{{ $t('userManage.pointsRule.review.points') }}</span>
+            <span>{{ $t('userManage.pointsRule.comment.points') }}</span>
+          </a-space>
+        </a-form-item>
+        <a-form-item :label="$t('userManage.pointsRule.image')">
+          <a-space>
+            <a-input-number
+              v-model="form.imagePoints"
+              :min="0"
+              :disabled="!form.commentEnabled"
+              style="width: 140px"
+            />
+            <span>{{ $t('userManage.pointsRule.image.points') }}</span>
           </a-space>
         </a-form-item>
 
@@ -124,8 +135,9 @@
     consumeEnabled: true,
     consumePerYuan: 10,
     consumePoints: 1,
-    reviewEnabled: true,
-    reviewPoints: 20,
+    commentEnabled: true,
+    commentPoints: 10,
+    imagePoints: 10,
     deductionEnabled: true,
     deductionPerYuan: 1,
     deductionPoints: 100,
